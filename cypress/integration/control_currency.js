@@ -69,11 +69,11 @@ context("Control Currency", () => {
 
 		TEST_CASES.forEach((test_case) => {
 			cy.window()
-				.its("frappe")
-				.then((frappe) => {
-					frappe.boot.sysdefaults.currency = test_case.currency;
-					frappe.boot.sysdefaults.currency_precision = test_case.default_precision ?? 2;
-					frappe.boot.sysdefaults.number_format = test_case.number_format ?? "#,###.##";
+				.its("appyframe")
+				.then((appyframe) => {
+					appyframe.boot.sysdefaults.currency = test_case.currency;
+					appyframe.boot.sysdefaults.currency_precision = test_case.default_precision ?? 2;
+					appyframe.boot.sysdefaults.number_format = test_case.number_format ?? "#,###.##";
 				});
 
 			get_dialog_with_currency(test_case.df_options).as("dialog");

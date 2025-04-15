@@ -1,0 +1,9 @@
+# Copyright (c) {year}, {app_publisher} and Contributors
+# See license.txt
+
+# import appyframe
+from appyframe.tests.utils import FrappeTestCase
+
+
+class Test{classname}(FrappeTestCase):
+	pass

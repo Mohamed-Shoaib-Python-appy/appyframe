@@ -1,0 +1,10 @@
+---
+no_cache: 1
+---
+
+<!-- </body> -->
+{{
+    appyframe
+        .get_doc('Print Format', appyframe.form_dict.print_format)
+        .get_html(appyframe.form_dict.name, appyframe.form_dict.letterhead)
+}}

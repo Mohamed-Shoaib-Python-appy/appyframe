@@ -3,12 +3,12 @@ set -e
 cd ~ || exit
 
 echo "::group::Install Bench"
-pip install frappe-bench
+pip install appyframe-bench
 echo "::endgroup::"
 
 echo "::group::Init Bench"
-bench -v init frappe-bench --skip-assets --python "$(which python)" --frappe-path "${GITHUB_WORKSPACE}"
-cd ./frappe-bench || exit
+bench -v init appyframe-bench --skip-assets --python "$(which python)" --appyframe-path "${GITHUB_WORKSPACE}"
+cd ./appyframe-bench || exit
 
 bench -v setup requirements --dev
 if [ "$TYPE" == "ui" ]
@@ -18,8 +18,8 @@ fi
 echo "::endgroup::"
 
 echo "::group::Create Test Site"
-mkdir ~/frappe-bench/sites/test_site
-cp "${GITHUB_WORKSPACE}/.github/helper/db/$DB.json" ~/frappe-bench/sites/test_site/site_config.json
+mkdir ~/appyframe-bench/sites/test_site
+cp "${GITHUB_WORKSPACE}/.github/helper/db/$DB.json" ~/appyframe-bench/sites/test_site/site_config.json
 
 if [ "$DB" == "mariadb" ]
 then
@@ -55,12 +55,12 @@ then
 fi
 echo "::endgroup::"
 
-bench start &> ~/frappe-bench/bench_start.log &
+bench start &> ~/appyframe-bench/bench_start.log &
 
 echo "::group::Install site"
 if [ "$TYPE" == "server" ]
 then
-  CI=Yes bench build --app frappe &
+  CI=Yes bench build --app appyframe &
   build_pid=$!
 fi
 

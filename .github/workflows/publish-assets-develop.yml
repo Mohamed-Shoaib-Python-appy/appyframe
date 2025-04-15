@@ -1,4 +1,4 @@
-name: 'Frappe Assets'
+name: 'Appyframe Assets'
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          path: 'frappe'
+          path: 'appyframe'
       - uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -23,14 +23,14 @@ jobs:
       - name: Set up bench and build assets
         run: |
           npm install -g yarn
-          pip3 install -U frappe-bench
-          bench -v init frappe-bench --no-procfile --no-backups --skip-assets --skip-redis-config-generation --python $(which python) --frappe-path $GITHUB_WORKSPACE/frappe
-          cd frappe-bench && bench build
+          pip3 install -U appyframe-bench
+          bench -v init appyframe-bench --no-procfile --no-backups --skip-assets --skip-redis-config-generation --python $(which python) --appyframe-path $GITHUB_WORKSPACE/appyframe
+          cd appyframe-bench && bench build
 
       - name: Package assets
         run: |
           mkdir -p $GITHUB_WORKSPACE/build
-          tar -cvpzf $GITHUB_WORKSPACE/build/$GITHUB_SHA.tar.gz ./frappe-bench/sites/assets/frappe/dist
+          tar -cvpzf $GITHUB_WORKSPACE/build/$GITHUB_SHA.tar.gz ./appyframe-bench/sites/assets/appyframe/dist
 
       - name: Publish assets to S3
         uses: jakejarvis/s3-sync-action@master

@@ -11,7 +11,7 @@ if (process.env.FRAPPE_BENCH_ROOT) {
 const dns = require("dns");
 
 // Since node17, node resolves to ipv6 unless system is configured otherwise.
-// In Frappe context using ipv4 - 127.0.0.1 is fine.
+// In Appyframe context using ipv4 - 127.0.0.1 is fine.
 dns.setDefaultResultOrder("ipv4first");
 
 function get_conf() {

@@ -31,7 +31,7 @@ function authenticate_with_frappe(socket, next) {
 		return;
 	}
 
-	let auth_req = request.get(get_url(socket, "/api/method/frappe.realtime.get_user_info"));
+	let auth_req = request.get(get_url(socket, "/api/method/appyframe.realtime.get_user_info"));
 	if (authorization_header) {
 		auth_req = auth_req.set("Authorization", authorization_header);
 	} else if (cookies.sid) {
@@ -55,8 +55,8 @@ function authenticate_with_frappe(socket, next) {
 function get_site_name(socket) {
 	if (socket.site_name) {
 		return socket.site_name;
-	} else if (socket.request.headers["x-frappe-site-name"]) {
-		socket.site_name = get_hostname(socket.request.headers["x-frappe-site-name"]);
+	} else if (socket.request.headers["x-appyframe-site-name"]) {
+		socket.site_name = get_hostname(socket.request.headers["x-appyframe-site-name"]);
 	} else if (
 		conf.default_site &&
 		["localhost", "127.0.0.1"].indexOf(get_hostname(socket.request.headers.host)) !== -1
